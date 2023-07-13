@@ -1,2 +1,7 @@
 .idea
-JavaAcademy.iml
+*.iml
+/Algorithms/*.iml
+/Algorithms/.idea
+/Algorithms/**/.idea
+/Algorithms/**/out
+/Algorithms/**/.iml
