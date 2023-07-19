@@ -1,7 +1,8 @@
 .idea
 *.iml
-/Algorithms/*.iml
-/Algorithms/.idea
 /Algorithms/**/.idea
 /Algorithms/**/out
 /Algorithms/**/.iml
+/DataStructures/**/.idea
+/DataStructures/**/out
+/DataStructures/**/.iml
