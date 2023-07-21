@@ -1,5 +1,3 @@
-package KnightsTour;
-
 public class KnightsTour {
     public static void main(String[] args) {
         int[][] chessBoard = {
