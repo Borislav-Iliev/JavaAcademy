@@ -1,2 +1,7 @@
-package CustomLinkedList;public class Main {
+package CustomLinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+
+    }
 }

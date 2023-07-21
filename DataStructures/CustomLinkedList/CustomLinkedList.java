@@ -1,2 +1,4 @@
-package CustomLinkedList;public class CustomLinkedList {
+package CustomLinkedList;
+
+public class CustomLinkedList {
 }
