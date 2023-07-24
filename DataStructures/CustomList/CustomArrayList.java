@@ -1,10 +1,12 @@
 package CustomList;
 
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Deque;
 
-public class CustomArrayList<E> {
+public class CustomArrayList<E> implements Serializable {
     private int size = 0;
-    private static final int DEFAULT_CAPACITY = 10;
+    private static int DEFAULT_CAPACITY = 10;
 
     private E[] elements;
 
@@ -19,6 +21,30 @@ public class CustomArrayList<E> {
         this.elements[this.size++] = element;
     }
 
+    public void add(int index, E element) {
+        if (index < 0 || index >= this.size) {
+            throw new ArrayIndexOutOfBoundsException("Index: " + index + " is out of bounds for size: " + this.size);
+        }
+
+        if (this.elements.length == this.size) {
+            increaseCapacity();
+        }
+
+        for (int i = 0; i < this.size; i++) {
+            if (i == index) {
+                this.size++;
+
+                for (int j = this.size - 1; j >= i + 1; j--) {
+                    E temp = this.elements[j];
+                    this.elements[j] = this.elements[j - 1];
+                    this.elements[j - 1] = temp;
+                }
+
+                this.elements[i] = element;
+            }
+        }
+    }
+
     public boolean remove(E element) {
         for (int i = 0; i < this.size; i++) {
             E currentElement = this.elements[i];
@@ -31,6 +57,11 @@ public class CustomArrayList<E> {
                 }
 
                 this.size--;
+
+                if (this.size * 2 < DEFAULT_CAPACITY) {
+                    decreaseCapacity();
+                }
+
                 return true;
             }
         }
@@ -56,6 +87,11 @@ public class CustomArrayList<E> {
                 }
 
                 this.size--;
+
+                if (this.size * 2 < DEFAULT_CAPACITY) {
+                    decreaseCapacity();
+                }
+
                 return elementToFind;
             }
         }
@@ -155,8 +191,13 @@ public class CustomArrayList<E> {
     }
 
     private void increaseCapacity() {
-        int newSize = DEFAULT_CAPACITY * 2;
-        elements = Arrays.copyOf(elements, newSize);
+        DEFAULT_CAPACITY = DEFAULT_CAPACITY * 2;
+        this.elements = Arrays.copyOf(this.elements, DEFAULT_CAPACITY);
+    }
+
+    private void decreaseCapacity() {
+        DEFAULT_CAPACITY = DEFAULT_CAPACITY / 2;
+        this.elements = Arrays.copyOf(this.elements, DEFAULT_CAPACITY);
     }
 
     @Override

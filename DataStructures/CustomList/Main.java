@@ -16,6 +16,10 @@ public class Main {
         System.out.println(customList);
         System.out.println(customList.size());
 
+//        customList.add(5, 9);
+//        System.out.println(customList);
+//        System.out.println(customList.size());
+
         customList.remove(Integer.valueOf(18));
         System.out.println(customList);
         System.out.println(customList.size());
