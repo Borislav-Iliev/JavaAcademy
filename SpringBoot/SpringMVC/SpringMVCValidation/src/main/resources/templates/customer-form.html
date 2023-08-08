@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Form</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body class="container">
+
+<form
+        th:action="@{/customer-form}"
+        th:method="POST"
+        th:object="${customer}"
+        class="d-flex flex-column justify-content-center align-items-center mx-auto"
+>
+    <div class="row">
+        <label for="firstName" class="col-form-label">First Name</label>
+        <input
+                id="firstName"
+                th:field="*{firstName}"
+                th:errorclass="is-invalid"
+                class="form-control"
+                type="text"
+                placeholder="First Name">
+        <div class="invalid-feedback alert alert-danger">
+            <div
+                    th:each="err : ${#fields.errors('firstName')}"
+                    th:text="${err}"
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="lastName" class="col-form-label">Last Name</label>
+        <input
+                id="lastName"
+                th:field="*{lastName}"
+                th:errorclass="is-invalid"
+                class="form-control"
+                type="text"
+                placeholder="Last Name">
+        <div class="invalid-feedback alert alert-danger">
+            <p
+                    th:each="err : ${#fields.errors('lastName')}"
+                    th:text="${err}"
+            >
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="age" class="col-form-label">Age</label>
+        <input
+                id="age"
+                th:field="*{age}"
+                th:errorclass="is-invalid"
+                class="form-control"
+                type="number"
+                placeholder="Age">
+        <div class="invalid-feedback alert alert-danger">
+            <p
+                    th:each="err : ${#fields.errors('age')}"
+                    th:text="${err}"
+            >
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="postalCode" class="col-form-label">Postal Code</label>
+        <input
+                id="postalCode"
+                th:field="*{postalCode}"
+                th:errorclass="is-invalid"
+                class="form-control"
+                type="text"
+                placeholder="Postal Code">
+        <div class="invalid-feedback alert alert-danger">
+            <p
+                    th:each="err : ${#fields.errors('postalCode')}"
+                    th:text="${err}"
+            >
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="courseCode" class="col-form-label">Course Code</label>
+        <input
+                id="courseCode"
+                th:field="*{courseCode}"
+                th:errorclass="is-invalid"
+                class="form-control"
+                type="text"
+                placeholder="Course Code">
+        <div class="invalid-feedback alert alert-danger">
+            <p
+                    th:each="err : ${#fields.errors('courseCode')}"
+                    th:text="${err}"
+            >
+            </p>
+        </div>
+    </div>
+
+    <input class="row justify-content-center btn btn-info mt-1" type="submit" value="Submit">
+</form>
+
+</body>
+
+</html>

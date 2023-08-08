@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body class="container">
+
+<div class="d-flex flex-column justify-content-center align-items-center mx-auto bg-success rounded-1 mt-1">
+    <p
+            class="text-center text-white"
+            th:text="'Successful submit: ' + ${customer.firstName} + ' ' + ${customer.lastName} + '!'"
+    >
+    </p>
+
+    <p
+            class="text-center text-white"
+            th:text="'Age: ' + ${customer.age}"
+    >
+    </p>
+
+    <p
+            class="text-center text-white"
+            th:text="'Postal Code: ' + ${customer.postalCode}"
+    >
+    </p>
+
+    <p
+            class="text-center text-white"
+            th:text="'Course Code: ' + ${customer.courseCode}"
+    >
+    </p>
+</div>
+
+</body>
+
+</html>
