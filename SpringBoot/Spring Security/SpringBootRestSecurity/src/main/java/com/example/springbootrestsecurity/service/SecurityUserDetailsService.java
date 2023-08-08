@@ -28,8 +28,8 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
     private UserDetails mapToUserDetails(Employee employee) {
         return new SecurityUserDetails(
-                employee.getFirstName(),
-                employee.getLastName(),
+                employee.getEmail(),
+                employee.getPassword(),
                 employee.getRoles()
                         .stream()
                         .map(this::mapToGrantedAuthority)

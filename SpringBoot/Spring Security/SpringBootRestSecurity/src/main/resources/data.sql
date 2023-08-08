@@ -1,5 +1,5 @@
 INSERT INTO employee (first_name, last_name, email, password)
-VALUES ("Leslie", "Andrews", "leslie@love2code.com", "$2a$12$dhjUJMPn7Zj/NhjQKijIReRKiVdIygoQHMcYkNbPYLXS8gO1zz.cC"),
+VALUES ("Leslie", "Andrews", "leslie@love2code.com", "$2a$12$OoZszeuDswmdIZMLjJXr/Ox0.K0XvlA7gw1eO6T95hemIhA7nBv1i"),
        ("Emma", "Baumgarten", "emma@love2code.com", "$2a$12$DZ5XUHDqO1hH4YskxiujRe1pAcRif7sCzuUKabsZeINrg8KtWaxKW"),
        ("Avani", "Gupta", "avani@love2code.com", "$2a$12$nBx/dbMOHUJwo5ZuzG/P2.QblbjCFLE3uTYQHPGyzUmh85KdJclXu");
 
