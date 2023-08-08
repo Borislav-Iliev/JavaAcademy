@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body class="container">
+
+<div class="d-flex flex-column justify-content-start align-items-start mx-auto mt-1 border-bottom">
+    <h2 class="bold">Employee Directory</h2>
+</div>
+
+<div class="d-flex flex-column justify-content-start align-items-start mx-auto mt-2">
+    <a class="btn btn-primary" th:href="@{/employees/add}">Add Employee</a>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center mx-auto mt-2">
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-header table-dark">
+        <tr class="text-white">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="e : ${employees}">
+            <td th:text="${e.firstName}"></td>
+            <td th:text="${e.lastName}"></td>
+            <td th:text="${e.email}"></td>
+            <td>
+                <a class="btn btn-info text-white" th:href="@{/employees/update/{id}(id = ${e.id})}">Update</a>
+                <a class="btn btn-danger text-white" th:href="@{/employees/delete/{id}(id = ${e.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+</html>
