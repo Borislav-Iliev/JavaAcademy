@@ -1,7 +1,7 @@
 INSERT INTO employee (first_name, last_name, email, password)
-VALUES ("Leslie", "Andrews", "leslie@love2code.com", "1234"),
-       ("Emma", "Baumgarten", "emma@love2code.com", "1234"),
-       ("Avani", "Gupta", "avani@love2code.com", "1234");
+VALUES ("Leslie", "Andrews", "leslie@love2code.com", "$2a$12$dhjUJMPn7Zj/NhjQKijIReRKiVdIygoQHMcYkNbPYLXS8gO1zz.cC"),
+       ("Emma", "Baumgarten", "emma@love2code.com", "$2a$12$DZ5XUHDqO1hH4YskxiujRe1pAcRif7sCzuUKabsZeINrg8KtWaxKW"),
+       ("Avani", "Gupta", "avani@love2code.com", "$2a$12$nBx/dbMOHUJwo5ZuzG/P2.QblbjCFLE3uTYQHPGyzUmh85KdJclXu");
 
 INSERT INTO `role` (role)
 VALUES ("EMPLOYEE"),
