@@ -3,6 +3,7 @@ package com.example.employeemvccrudexample.web;
 import com.example.employeemvccrudexample.model.dto.AddEmployeeDto;
 import com.example.employeemvccrudexample.service.EmployeeService;
 import jakarta.validation.Valid;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,5 +52,15 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @PostMapping("/login-error")
+    public String loginError(@ModelAttribute("username") String username,
+                             RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("username", username);
+        redirectAttributes.addFlashAttribute("badCredentials", true);
+
+        return "redirect:/auth/login";
     }
 }
