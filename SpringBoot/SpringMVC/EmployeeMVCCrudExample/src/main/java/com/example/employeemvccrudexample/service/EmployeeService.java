@@ -8,6 +8,7 @@ import com.example.employeemvccrudexample.model.enums.RoleEnum;
 import com.example.employeemvccrudexample.model.error.EmployeeNotFoundException;
 import com.example.employeemvccrudexample.repository.EmployeeRepository;
 import com.example.employeemvccrudexample.repository.RoleRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,23 +27,21 @@ public class EmployeeService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final UserDetailsService userDetailsService;
+    private final ModelMapper modelMapper;
 
     // Constructor injection
-    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserDetailsService userDetailsService) {
+    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserDetailsService userDetailsService, ModelMapper modelMapper) {
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.userDetailsService = userDetailsService;
+        this.modelMapper = modelMapper;
     }
 
     public void registerAndLogin(AddEmployeeDto addEmployeeDto) {
-        Employee employee = new Employee();
+        Employee employee = this.modelMapper.map(addEmployeeDto, Employee.class);
 
-        employee
-                .setFirstName(addEmployeeDto.getFirstName())
-                .setLastName(addEmployeeDto.getLastName())
-                .setEmail(addEmployeeDto.getEmail())
-                .setPassword(this.passwordEncoder.encode(addEmployeeDto.getPassword()));
+        employee.setPassword(this.passwordEncoder.encode(addEmployeeDto.getPassword()));
 
         Role role = this.roleRepository.findByRole(RoleEnum.EMPLOYEE);
         employee.setRoles(List.of(role));
@@ -87,12 +86,12 @@ public class EmployeeService {
 
     // Define method for creating a new employee
     public Employee addEmployee(AddEmployeeDto addEmployeeDto) {
-        Employee employee = new Employee();
+        Employee employee = this.modelMapper.map(addEmployeeDto, Employee.class);
 
-        employee
-                .setFirstName(addEmployeeDto.getFirstName())
-                .setLastName(addEmployeeDto.getLastName())
-                .setEmail(addEmployeeDto.getEmail());
+        employee.setPassword(this.passwordEncoder.encode(employee.getPassword()));
+
+        Role role = this.roleRepository.findByRole(RoleEnum.EMPLOYEE);
+        employee.setRoles(List.of(role));
 
         return this.employeeRepository.save(employee);
     }

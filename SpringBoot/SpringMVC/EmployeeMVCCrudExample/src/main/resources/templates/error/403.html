@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,6 +12,9 @@
 
 <div class="d-flex flex-column justify-content-center align-items-center mx-auto rounded-1 bg-info">
     <p class="text-white text-center">Sorry, you don't have access to the following page!</p>
+    <p class="text-white text-center">You can go back to the
+        <a class="text-decoration-none" th:href="@{/employees}">Employee page</a>
+    </p>
 </div>
 
 </body>
