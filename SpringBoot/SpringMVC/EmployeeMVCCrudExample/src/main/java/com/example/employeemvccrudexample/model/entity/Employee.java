@@ -2,6 +2,9 @@ package com.example.employeemvccrudexample.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -20,9 +23,19 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "employee_role",
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
     // Define constructors
 
     public Employee() {
+        this.roles = new ArrayList<>();
     }
 
     public Employee(String firstName, String lastName, String email) {
@@ -69,6 +82,24 @@ public class Employee {
         return this;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public Employee setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public Employee setRoles(List<Role> roles) {
+        this.roles = roles;
+        return this;
+    }
+
     // Define ToString
 
     @Override
@@ -78,6 +109,8 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,4 @@
+
+
+INSERT INTO `role`
+VALUES (1, "EMPLOYEE"), (2, "MANAGER"), (3, "ADMIN");

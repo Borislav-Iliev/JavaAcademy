@@ -1,10 +1,17 @@
 package com.example.employeemvccrudexample.model.dto;
 
+import com.example.employeemvccrudexample.model.validation.FieldMatch;
 import com.example.employeemvccrudexample.model.validation.UniqueEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword",
+        message = "Passwords must match!"
+)
 public class AddEmployeeDto {
 
     @NotBlank(message = "First Name is required!")
@@ -19,6 +26,14 @@ public class AddEmployeeDto {
     @Email(message = "Email must be a valid email!")
     @UniqueEmail(message = "Email already taken!")
     private String email;
+
+    @NotBlank(message = "Password is required!")
+    @Size(min = 2, max = 20, message = "Password must be between 2 and 20 characters!")
+    private String password;
+
+    @NotBlank(message = "Password is required!")
+    @Size(min = 2, max = 20, message = "Password must be between 2 and 20 characters!")
+    private String confirmPassword;
 
     public AddEmployeeDto() {
     }
@@ -53,6 +68,24 @@ public class AddEmployeeDto {
 
     public AddEmployeeDto setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public AddEmployeeDto setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public AddEmployeeDto setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
         return this;
     }
 }
