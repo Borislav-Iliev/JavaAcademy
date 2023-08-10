@@ -1,6 +1,7 @@
 package com.example.employeemvccrudexample.web;
 
 import com.example.employeemvccrudexample.model.dto.AddEmployeeDto;
+import com.example.employeemvccrudexample.model.dto.UpdateEmployeeDto;
 import com.example.employeemvccrudexample.model.entity.Employee;
 import com.example.employeemvccrudexample.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -25,6 +26,11 @@ public class EmployeeController {
         return new AddEmployeeDto();
     }
 
+    @ModelAttribute("updateEmployeeDto")
+    public UpdateEmployeeDto initUpdateEmployeeDto() {
+        return new UpdateEmployeeDto();
+    }
+
     @GetMapping("")
     public String employees(Model model) {
         model.addAttribute("employees", this.employeeService.getAllEmployeesOrderedByLastName());
@@ -38,8 +44,8 @@ public class EmployeeController {
 
     @PostMapping("/add")
     public String addEmployee(@Valid AddEmployeeDto addEmployeeDto,
-                               BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addEmployeeDto", addEmployeeDto);
@@ -64,18 +70,18 @@ public class EmployeeController {
 
     @PostMapping("/update/{id}")
     public String updateEmployee(@PathVariable Long id,
-                                 @Valid AddEmployeeDto addEmployeeDto,
+                                 @Valid UpdateEmployeeDto updateEmployeeDto,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addEmployeeDto", addEmployeeDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addEmployeeDto", bindingResult);
+            redirectAttributes.addFlashAttribute("updateEmployeeDto", updateEmployeeDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateEmployeeDto", bindingResult);
 
             return "redirect:/employees/update/" + id;
         }
 
-        this.employeeService.updateEmployee(id, addEmployeeDto);
+        this.employeeService.updateEmployee(id, updateEmployeeDto);
 
         return "redirect:/employees";
     }

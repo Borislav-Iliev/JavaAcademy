@@ -2,6 +2,7 @@ package com.example.employeemvccrudexample.service;
 
 import com.example.employeemvccrudexample.model.dto.AddEmployeeDto;
 import com.example.employeemvccrudexample.model.dto.EmployeeDto;
+import com.example.employeemvccrudexample.model.dto.UpdateEmployeeDto;
 import com.example.employeemvccrudexample.model.entity.Employee;
 import com.example.employeemvccrudexample.model.entity.Role;
 import com.example.employeemvccrudexample.model.enums.RoleEnum;
@@ -97,15 +98,22 @@ public class EmployeeService {
     }
 
     // Define method for updating an employee by id
-    public Employee updateEmployee(Long id, AddEmployeeDto addEmployeeDto) {
+    public Employee updateEmployee(Long id, UpdateEmployeeDto updateEmployeeDto) {
         Employee employee = this.employeeRepository
                 .findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee with id: " + id + " not found!"));
 
-        employee
-                .setFirstName(addEmployeeDto.getFirstName())
-                .setLastName(addEmployeeDto.getLastName())
-                .setEmail(addEmployeeDto.getEmail());
+        if (validateField(updateEmployeeDto.getFirstName(), 2, 20)) {
+            employee.setFirstName(updateEmployeeDto.getFirstName());
+        }
+
+        if (validateField(updateEmployeeDto.getLastName(), 2, 20)) {
+            employee.setLastName(updateEmployeeDto.getLastName());
+        }
+
+        if (validateField(updateEmployeeDto.getEmail(), 2, 20)) {
+            employee.setEmail(updateEmployeeDto.getEmail());
+        }
 
         return this.employeeRepository.save(employee);
     }
@@ -113,5 +121,9 @@ public class EmployeeService {
     // Define method for deleting an employee by the employee id
     public void deleteById(Long id) {
         this.employeeRepository.deleteById(id);
+    }
+
+    private boolean validateField(String field, int minLength, int maxLength) {
+        return field.length() >= minLength && field.length() <= maxLength && !field.isBlank();
     }
 }
