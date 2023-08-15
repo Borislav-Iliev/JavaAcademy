@@ -17,13 +17,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        return this.userRepository.getAllUsers();
     }
 
-    public User getUserById(Long id) {
+    public UserDto getUserById(Long id) {
         return this.userRepository
-                .findById(id)
+                .getUserById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("User with id: " + id + " not found!"));
     }
 
