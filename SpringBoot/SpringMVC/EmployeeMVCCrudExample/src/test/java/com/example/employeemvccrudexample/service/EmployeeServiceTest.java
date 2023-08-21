@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
+
+    @InjectMocks
     private EmployeeService employeeService;
 
     @Mock
@@ -53,11 +56,11 @@ public class EmployeeServiceTest {
     @Mock
     private ModelMapper modelMapper;
 
-    @BeforeEach
-    void setUp() {
-        this.employeeService = new EmployeeService(this.employeeRepository, this.passwordEncoder,
-                this.roleRepository, this.userDetailsService, this.modelMapper);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        this.employeeService = new EmployeeService(this.employeeRepository, this.passwordEncoder,
+//                this.roleRepository, this.userDetailsService, this.modelMapper);
+//    }
 
     @AfterEach
     void tearDown() {
@@ -84,7 +87,6 @@ public class EmployeeServiceTest {
                 .thenReturn(employee);
 
         UserDetails userDetails = initUserDetails(employee);
-
         when(this.userDetailsService.loadUserByUsername(employee.getEmail()))
                 .thenReturn(userDetails);
 
